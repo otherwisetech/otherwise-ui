@@ -127,13 +127,14 @@ pub struct Sidebar {
     id: ElementId,
     width: f32,
     header: Option<AnyElement>,
+    switcher: Option<AnyElement>,
     groups: Vec<NavGroup>,
     footer: Vec<AnyElement>,
 }
 
 impl Sidebar {
     pub fn new(id: impl Into<ElementId>) -> Self {
-        Sidebar { id: id.into(), width: size::SIDEBAR, header: None, groups: Vec::new(), footer: Vec::new() }
+        Sidebar { id: id.into(), width: size::SIDEBAR, header: None, switcher: None, groups: Vec::new(), footer: Vec::new() }
     }
     /// The app's badge and name at the top (when the app has no [`AppHeader`]).
     pub fn brand(mut self, mark: impl IntoElement, name: impl Into<SharedString>) -> Self {
@@ -143,6 +144,12 @@ impl Sidebar {
     /// Any element at the top instead of the brand (a workspace switcher).
     pub fn header(mut self, el: impl IntoElement) -> Self {
         self.header = Some(el.into_any_element());
+        self
+    }
+    /// A switcher right under the brand, full width (the open book, company or workspace: a
+    /// ghost dropdown button). It stays put while the groups scroll.
+    pub fn switcher(mut self, el: impl IntoElement) -> Self {
+        self.switcher = Some(el.into_any_element());
         self
     }
     pub fn group(mut self, g: NavGroup) -> Self {
@@ -214,6 +221,7 @@ impl RenderOnce for Sidebar {
             .border_color(t.border)
             .bg(t.surface)
             .children(self.header)
+            .children(self.switcher.map(|el| div().flex().flex_col().flex_none().pb(px(space::S5)).child(el)))
             .child(list)
             .when(!self.footer.is_empty(), |d| d.child(div().flex().flex_col().flex_none().gap(px(space::S4)).pt(px(space::S4)).children(self.footer)))
     }

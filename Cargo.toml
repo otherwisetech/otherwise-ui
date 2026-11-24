@@ -1,7 +1,7 @@
 [package]
 name = "otherwise-ui"
 description = "The Otherwise design system for GPUI: the family's tokens (Inter, type scale, spacing, radius, light / dark colours, per-app accent) and its shared chrome (sidebar, header, footer, About, cards, alerts, stat tiles, progress, empty states)"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT OR Apache-2.0"

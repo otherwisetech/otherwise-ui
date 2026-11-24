@@ -9,7 +9,7 @@ of every Otherwise Technologies desktop app, so the whole family looks like one 
   sidebar 232, nav row 34, controls 32), icon sizes, motion.
 - **Theme** (`theme`): the family's warm neutrals and status colours in light and dark, one
   `Accent` per app (`accents::*`), `Appearance` (light / dark / system) and `apply`.
-- **Chrome** (`components`): `Sidebar` (groups; items with icon, label, badge, shortcut hint),
+- **Chrome** (`components`): `Sidebar` (brand, a book / workspace switcher, groups; items with icon, label, badge, shortcut hint),
   `AppHeader`, `AppFooter` ("<app> · Otherwise Technologies LLC · Acerca de"), `AboutModal`
   (logo, version, description, credit, website, Vcity invite, source link, licence), `modal`.
 - **Blocks**: buttons (primary, secondary, ghost, danger, icon), input and search frames,
