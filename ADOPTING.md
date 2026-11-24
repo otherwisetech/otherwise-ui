@@ -52,6 +52,12 @@ pub use otherwise_ui::tokens::SANS;
 pub fn tokens(cx: &gpui::App) -> Tokens { otherwise_ui::theme(cx) }
 ```
 
+**Servers** (0.1.2): an app that can work on an Otherwise server's documents puts
+`ServerSwitcher` in `Sidebar::header` (instead of `brand`): Local plus the servers it knows,
+each with a state (`ServerState`: the tile's dot), its own words (`ServerLabels`, or
+`ServerLabels::for_locale`) and callbacks (`on_select`, `on_add`, `on_settings`, `on_remove`).
+It does no networking; the app gets its servers from `otherwise-remote`.
+
 Suites with one accent per tool (Voltia, Surco, Brújula) replace their `set_accent` with
 `otherwise_ui::set_accent(accent, cx)` and their `Accent` with `otherwise_ui::Accent` (same
 fields: `light`, `dark`, `brand`).

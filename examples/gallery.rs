@@ -123,8 +123,13 @@ impl Render for Gallery {
         let l = self.labels();
         let screen = self.screen;
         let nav = |id: &'static str, label: &'static str, s: Screen, ic: IconName| NavItem::new(id, label).icon(ic).active(screen == s);
+        let servers = vec![
+            ServerItem { id: "local".into(), name: "Local".into(), state: ServerState::Local, active: false },
+            ServerItem { id: "studio".into(), name: "Mac Studio".into(), state: ServerState::Connected, active: true },
+            ServerItem { id: "imac".into(), name: "iMac oficina".into(), state: ServerState::Offline, active: false },
+        ];
         let sidebar = Sidebar::new("sidebar")
-            .brand(logo_mark(LOGO), "Gallery")
+            .header(div().pb(px(space::S4)).child(ServerSwitcher::new("servers", servers, ServerLabels::for_locale(l.locale)).subtitle("Gallery · Otherwise SAS").on_select(|_, _, _| {}).on_add(|_, _| {}).on_settings(|_, _, _| {}).on_remove(|_, _, _| {})))
             .switcher(Button::new("book-switch").label("Otherwise SAS").ghost().small().dropdown_caret(true).dropdown_menu(|menu, _, _| menu.label("Libros").item(PopupMenuItem::new("Otherwise SAS").checked(true)).item(PopupMenuItem::new("Otherwise LLC"))))
             .group(
                 NavGroup::new(None::<&str>)
