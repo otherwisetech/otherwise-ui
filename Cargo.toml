@@ -1,0 +1,41 @@
+[package]
+name = "otherwise-ui"
+description = "The Otherwise design system for GPUI: the family's tokens (Inter, type scale, spacing, radius, light / dark colours, per-app accent) and its shared chrome (sidebar, header, footer, About, cards, alerts, stat tiles, progress, empty states)"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/otherwisetech/otherwise-ui"
+readme = "README.md"
+keywords = ["gpui", "design-system", "ui", "theme"]
+categories = ["gui"]
+include = ["src/**", "assets/**", "examples/**", "tests/**", "README.md", "ADOPTING.md", "LICENSE-*", "Cargo.toml"]
+
+[lib]
+name = "otherwise_ui"
+
+[features]
+default = ["fonts"]
+# Embeds Inter (Regular, Medium, SemiBold; SIL OFL 1.1) and registers it in `init`. Turn it off
+# only if the app already ships the same Inter files itself.
+fonts = []
+
+[dependencies]
+# GPUI stack: no `rev` here on purpose. Apps depend on the same git URLs, so one copy is built;
+# Cargo.lock pins zed eb5483528be6 and gpui-component 972a3ebfd01a. Never `cargo update` them.
+gpui = { git = "https://github.com/zed-industries/zed" }
+gpui-component = { git = "https://github.com/longbridge/gpui-component" }
+
+[dev-dependencies]
+gpui_platform = { git = "https://github.com/zed-industries/zed", features = ["font-kit"] }
+gpui-component-assets = { git = "https://github.com/longbridge/gpui-component" }
+
+[[example]]
+name = "gallery"
+
+[profile.dev]
+opt-level = 1
+# GPUI with debuginfo is ~10 GB of target/; keep it lean
+debug = 0
+[profile.dev.package."*"]
+opt-level = 2
