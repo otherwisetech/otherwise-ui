@@ -6,7 +6,7 @@
 use gpui::*;
 use gpui_component::button::{Button, ButtonVariants as _};
 use gpui_component::menu::{DropdownMenu as _, PopupMenuItem};
-use gpui_component::{IconName, Root};
+use gpui_component::{IconName, Root, Sizable as _};
 use otherwise_ui::tokens::{size, space, text};
 use otherwise_ui::*;
 
@@ -125,6 +125,7 @@ impl Render for Gallery {
         let nav = |id: &'static str, label: &'static str, s: Screen, ic: IconName| NavItem::new(id, label).icon(ic).active(screen == s);
         let sidebar = Sidebar::new("sidebar")
             .brand(logo_mark(LOGO), "Gallery")
+            .switcher(Button::new("book-switch").label("Otherwise SAS").ghost().small().dropdown_caret(true).dropdown_menu(|menu, _, _| menu.label("Libros").item(PopupMenuItem::new("Otherwise SAS").checked(true)).item(PopupMenuItem::new("Otherwise LLC"))))
             .group(
                 NavGroup::new(None::<&str>)
                     .item(nav("n-overview", "Resumen", Screen::Overview, IconName::LayoutDashboard).shortcut("⌘1").on_click(cx.listener(|this, _, _, cx| {
