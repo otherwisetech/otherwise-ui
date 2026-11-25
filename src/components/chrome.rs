@@ -520,7 +520,7 @@ impl RenderOnce for AboutModal {
             card.items_center()
                 .px(px(space::S12))
                 .pt(px(space::S12))
-                .children(logo.map(|l| img(l).size(px(size::ABOUT_LOGO))))
+                .children(logo.map(|l| img(l).flex_none().size(px(size::ABOUT_LOGO))))
                 .child(
                     div()
                         .flex()
